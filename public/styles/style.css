@@ -1,0 +1,21 @@
+body{
+    font-family: "Geneva", sans-serif;
+    color: lightblue;
+    margin: 0;
+}
+
+.black {
+    background-color: #29292C;
+    width: 800px;
+    height: 800px;
+    padding: 5rem;
+}
+
+.p {
+    max-width: 800px;
+    opacity: 0;
+}
+
+.title {
+    opacity: 0;
+}
