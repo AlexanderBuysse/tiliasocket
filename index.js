@@ -15,20 +15,10 @@ io.on('connection', (socket) => {
 
     console.log(`${socket.id} connected`);
 
-    if(!showMode) {
-        showMode = socket.id;
-        io.emit('showButton', true);
-    }
-
 
     socket.on('disconnect', () => {
         console.log(`user disconnect`);
         inProgress = false;
-        console.log(showMode, socket.id);
-        if(showMode === socket.id) {
-            showMode= false;
-            console.log('gebruiker is uit de show mode');
-        }
     });
 
     io.emit(`inprogress`, inProgress);
@@ -41,10 +31,6 @@ io.on('connection', (socket) => {
 
     socket.on('stop', ()=> { 
         inProgress = false;
-    })
-
-    socket.on('hideShowButton', (bool)=> {
-        io.emit('showButton', false);
     })
 });
 

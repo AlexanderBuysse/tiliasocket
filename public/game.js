@@ -120,15 +120,6 @@
 
             // event listeners
             document.querySelector(`.start`).addEventListener('click', handleClickButton);
-            document.querySelector(`.showMode`).addEventListener('click', handleClickShow);
-
-            socket.on('showButton', function(bool){
-                if(bool) {
-                    document.querySelector(`.showMode`).style.display = 'none';
-                } else {
-                    document.querySelector(`.showMode`).style.display = 'block';
-                }
-            })
 
             socket.on(`inprogress`, function (bool) {
                 console.log(bool);
@@ -136,21 +127,19 @@
             })
 
             socket.on('codeString', function (code) {
-                if (!emittersStart && !inProgress) {
-                    console.log(code);
-                    startWithCode(code);
-                    emittersStart= true;  
-                    onceEmitters= true;
+                if(code == 8888 && document.querySelector(`.code`).value == 8888) {
+                    document.querySelector(`.phaser`).classList.remove('none');
                 } else {
-                    console.log('wait for the other animation to end');
+                    if (!emittersStart && !inProgress) {
+                        console.log(code);
+                        startWithCode(code);
+                        emittersStart= true;  
+                        onceEmitters= true;
+                    } else {
+                        console.log('wait for the other animation to end');
+                    }
                 }
             });
-        }
-
-        function handleClickShow() { 
-            document.querySelector(`.uiUser`).classList.add('none');
-            document.querySelector(`.phaser`).classList.remove('none');
-            socket.emit('hideShowButton', false);
         }
 
         function handleClickButton() {

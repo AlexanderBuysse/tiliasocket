@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": "16.1.0"
+    "node": "16.14.0"
   },
   "scripts": {
     "start": "node index.js"

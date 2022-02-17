@@ -2,20 +2,30 @@
 <html lang="en">
 
 <head>
-    <title>tree stuff</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Tilia Trough Time</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/stx5pgl.css">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/1XXSSHBj/leaves.png"/>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser-arcade-physics.min.js"></script>
     <script src="./datgui.js"></script>
 </head>
 
 <body>
-    <div class="uiUser">
-        <form action="">
-            <input class="code" type="text" maxlength="4" placeholder="0555"> 
-        </form>
-        <button class="start">start Emitters</button>    
-    </div>
-    <button class="showMode">showmode</button>
+    <article class="container">
+        <h1 class="container-title">VUL HIER JE PERSOONLIJKE CODE IN</h1>
+        <p class="container-text">Vul hier je persoonlijke code in die je ontvangen hebt na het aanpassen van alle paramters op Ten Huize Tilia. </p>
+        <div class="uiUser">
+            <form action="">
+                <input class="code input" type="text" maxlength="4" placeholder="0555"> 
+            </form>
+            <button class="start button">start animatie</button>    
+        </div>
+        <section>
+            <h3 class="container-subTitle">Geen code?</h3>
+            <p class="container-text">Ga naar Ten Huize Tilia en verkrijg je persoonlijke code door parameters aan te passen.</p>
+            <a href="https://alexanderbuysse.be/tilia/">Naar Ten Huize Tilia</a>
+        </section>
+    </article>
     <div class="phaser" id="phaser-example">
     </div>
     <script src="/socket.io/socket.io.js"></script>
