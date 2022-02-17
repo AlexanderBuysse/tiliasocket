@@ -122,7 +122,6 @@
             treeTopBlue.stop();
 
             // event listeners
-            document.querySelector(`.start`).addEventListener('click', handleClickButton);
 
             socket.on(`inprogress`, function (bool) {
                 inProgress = bool;
@@ -390,4 +389,5 @@
                 curves[i].draw(graphics);
             }
         }
+        document.querySelector(`.start`).addEventListener('click', handleClickButton);
 }

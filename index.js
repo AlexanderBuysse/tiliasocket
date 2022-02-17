@@ -26,6 +26,7 @@ io.on('connection', (socket) => {
         io.emit(`codeString`, code);
         io.emit(`startShow`, true);
         inProgress = true;
+        console.log(code);
     });
 
     socket.on('stop', ()=> { 
