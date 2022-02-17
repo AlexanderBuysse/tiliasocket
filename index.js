@@ -8,7 +8,6 @@ const io = new Server(server);
 app.use(express.static('public'));
 
 let inProgress = false;
-let showMode = false;
 
 
 io.on('connection', (socket) => {
@@ -31,6 +30,7 @@ io.on('connection', (socket) => {
 
     socket.on('stop', ()=> { 
         inProgress = false;
+        io.emit(`inprogress`, inProgress);
     })
 });
 

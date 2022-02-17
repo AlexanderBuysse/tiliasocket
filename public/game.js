@@ -26,6 +26,9 @@
         let emitters = [];
         let onceEmitters = true;
         let emittersStart= false;
+        let once =true
+
+        let codeGlobal;
 
         let lastTime = 0;
         let forever = false;
@@ -122,22 +125,155 @@
             document.querySelector(`.start`).addEventListener('click', handleClickButton);
 
             socket.on(`inprogress`, function (bool) {
-                console.log(bool);
                 inProgress = bool;
+                if (bool) {
+                    document.querySelector(`.button`).textContent = "Even geduld";                 
+                } else {
+                    document.querySelector(`.button`).textContent = "Start animatie";
+                }
             })
 
             socket.on('codeString', function (code) {
-                if(code == 8888 && document.querySelector(`.code`).value == 8888) {
-                    document.querySelector(`.phaser`).classList.remove('none');
-                } else {
-                    if (!emittersStart && !inProgress) {
-                        console.log(code);
-                        startWithCode(code);
-                        emittersStart= true;  
-                        onceEmitters= true;
+                let notok = false;
+                switch (code) {
+                    case '0101':
+                        console.log('oke')
+                        break;
+
+                        case '0102':
+                        console.log('oke')
+                        break;
+
+                        case '0103':
+                        console.log('oke')
+                        break;
+
+                        case '0104':
+                        console.log('oke')
+                        break;
+
+                        case '0105':
+                        console.log('oke')
+                        break;
+
+                        case '0106':
+                        console.log('oke')
+                        break;
+
+                        case '0107':
+                        console.log('oke')
+                        break;
+
+                        case '0108':
+                        console.log('oke')
+                        break;
+
+                        case '0109':
+                        console.log('oke')
+                        break;
+
+                        case '0110':
+                        console.log('oke')
+                        break;
+
+                        case '0201':
+                        console.log('oke')
+                        break;
+
+                        case '0301':
+                        console.log('oke')
+                        break;
+
+                        case '0401':
+                        console.log('oke')
+                        break;
+
+                        case '0501':
+                        console.log('oke')
+                        break;
+
+                        case '0601':
+                        console.log('oke')
+                        break;
+
+                        case '0701':
+                        console.log('oke')
+                        break;
+
+                        case '0801':
+                        console.log('oke')
+                        break;
+
+                        case '0901':
+                        console.log('oke')
+                        break;
+
+                        case '1001':
+                        console.log('oke')
+                        break;
+
+                        case '0202':
+                        console.log('oke')
+                        break;
+
+                        case '0303':
+                        console.log('oke')
+                        break;
+
+                        case '0404':
+                        console.log('oke')
+                        break;
+
+                        case '0505':
+                        console.log('oke')
+                        break;
+
+                        case '0606':
+                        console.log('oke')
+                        break;
+
+                        case '0707':
+                        console.log('oke')
+                        break;
+
+                        case '0808':
+                        console.log('oke')
+                        break;
+
+                        case '0909':
+                        console.log('oke')
+                        break;
+
+                        case '1010':
+                        console.log('oke')
+                        break;
+
+                        case '8888':
+                        console.log('oke')
+                        break;
+                
+                    default:
+                        notok = true;
+                        break;
+                }
+                if(!notok) {
+                    if(code == 8888 && document.querySelector(`.code`).value == 8888) {
+                        document.querySelector(`.phaser`).classList.remove('none');
                     } else {
-                        console.log('wait for the other animation to end');
-                    }
+                        if (!emittersStart && !inProgress) {
+                            console.log(code);
+                            codeGlobal = code;
+                            startWithCode(code);
+                            emittersStart= true;  
+                            onceEmitters= true;
+                            once = true;
+                            document.querySelector(`.button`).textContent = "Even geduld";
+                        } else {
+                            document.querySelector(`.button`).textContent = "Even geduld";
+                        }
+                    }    
+                } else {
+                    console.log('invalid code');
                 }
             });
         }
@@ -146,8 +282,21 @@
             socket.emit("start", document.querySelector(`.code`).value);
         }
 
-        function createLifepoints() {
-            return 99;
+        function createLifepoints(codeF) {
+            const arr = codeF.split(``)
+            let first = arr[0]+arr[1];
+            let second =  arr[2]+arr[3];
+            const comb = parseInt(first) + parseInt(second); 
+
+            if(comb === 2) {
+                return 80
+            } if(comb <= 5) {
+                return 85
+            } if(comb <= 10) {
+                return 90
+            } else {
+                return 99;
+            }
         }
         
         function startWithCode(code) {
@@ -182,7 +331,10 @@
                 treeTopBlue.stop();
                 emittersStart =false;
                 lastTime= 0;
-                socket.emit('stop', 'stop de interactie');
+                if (once) {
+                    socket.emit('stop', 'stop de interactie');
+                    once =false;
+                }
             } else {
                 if(life >= 80 && life < 90) {
                     treeTopBlue.quantity.propertyValue = sliderValueTop * .75;
@@ -200,7 +352,7 @@
             if (emittersStart) {
                 if (lastTime === 0) {
                     lastTime = time;
-                    life = createLifepoints(99);
+                    life = createLifepoints(codeGlobal);
                 } else if((time - lastTime) >= 300) {
                     lastTime = time;
                     if (!forever) {
